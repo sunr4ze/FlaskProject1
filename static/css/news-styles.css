@@ -1,0 +1,24 @@
+.posts{
+    display: flex;
+    margin-top: 30px;
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.post{
+    font-size: 30px;
+    margin: auto auto auto auto;
+}
+
+.title-text{
+    font-size: 30px;
+    font-family: Bradley Hand, cursive;
+}
+
+.block-title{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
