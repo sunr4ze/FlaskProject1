@@ -39,7 +39,7 @@ def create_article():
         try:
             db.session.add(article)
             db.session.commit()
-            return redirect('/')
+            return redirect('/posts')
         except:
             return "При добавлении статьи произошла ошибка"
     else:
@@ -50,6 +50,12 @@ def create_article():
 def news():
     articles = Article.query.order_by(Article.date).all()
     return render_template("news.html", articles=articles)
+
+
+
+@app.route('/post')
+def post():
+    return render_template('post.html')
 
 
 
