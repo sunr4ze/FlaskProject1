@@ -11,13 +11,17 @@
           Все статьи на сайте
       </p>
   </div>
-    {% for el in articles %}
-    <div class="alert alert-info">
-        <h2>{{ el.title }}</h2>
-        <p>{{ el.intro  }}</p>
-        <p><b>Дата: {{ el.date.strftime("%d/%m/%y %H:%M" )}}</b></p>
-        <button class="btn btn-warning">Детальнее</button>
-    </div>
-    {% endfor %}
+    {% if articles %}
+        {% for el in articles %}
+        <div class="alert alert-info">
+            <h2>{{ el.title }}</h2>
+            <p>{{ el.intro }}</p>
+            <p><b>Дата: {{ el.date.strftime("%d/%m/%y %H:%M" )}}</b></p>
+            <a href="/news/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="title-text">У нас ещё нет статей на сайте</p>
+    {% endif %}
 </div>
 {% endblock %}

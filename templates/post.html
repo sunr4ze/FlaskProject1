@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Post title
+{{ article.title }}
 {% endblock %}
 
 {% block content %}
-  <div class="intro">
+<div class="container mt-5">
+  <h1>{{ article.title }}</h1>
+  <div class="alert alert-info">
     <p class="post-text">
-      Intro
+      {{ article.intro }}
     </p>
     <p class="date grey">
-      Date
+      {{ article.date.strftime("%d/%m/%y %H:%M") }}
     </p>
+    <a href="/news/{{ article.id }}/delete" class="btn btn-danger">Удалить</a>
+    <a href="/news/{{ article.id }}/update" class="btn btn-success">Редактировать</a>
   </div>
   <hr>
   <div class="text">
@@ -19,4 +23,5 @@ Post title
       All Text
     </p>
   </div>
+</div>
 {% endblock %}

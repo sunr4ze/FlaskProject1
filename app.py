@@ -39,7 +39,7 @@ def create_article():
         try:
             db.session.add(article)
             db.session.commit()
-            return redirect('/posts')
+            return redirect('/news')
         except:
             return "При добавлении статьи произошла ошибка"
     else:
@@ -48,14 +48,43 @@ def create_article():
 
 @app.route('/news')
 def news():
-    articles = Article.query.order_by(Article.date).all()
+    articles = Article.query.order_by(Article.date.desc()).all()
     return render_template("news.html", articles=articles)
 
 
 
-@app.route('/post')
-def post():
-    return render_template('post.html')
+@app.route('/news/<int:id>')
+def post(id):
+    article = Article.query.get(id)
+    return render_template('post.html', article=article)
+
+
+@app.route('/news/<int:id>/delete')
+def post_delete(id):
+    article = Article.query.get_or_404(id)
+    try:
+        db.session.delete(article)
+        db.session.commit()
+        return redirect('/news')
+    except:
+        return "При удалении статьи произошла ошибка"
+
+
+@app.route('/news/<int:id>/update', methods=['POST', 'GET'])
+def post_update(id):
+    article = Article.query.get(id)
+    if request.method=='POST':
+        article.title = request.form['title']
+        article.intro = request.form['intro']
+        article.text = request.form['text']
+        try:
+            db.session.add(article)
+            db.session.commit()
+            return redirect('/news')
+        except:
+            return "При добавлении статьи произошла ошибка"
+    else:
+        return render_template("create-article.html", article=article)
 
 
 
